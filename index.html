@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<!-- saved from url=(0070)https://spinningup.qiwihui.com/zh_CN/latest/spinningup/rl_intro2.html# -->
+<html class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths" lang="zh-CN" style=""><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>第二部分：强化学习算法 — Spinning Up  文档</title>
+  
+    <link rel="shortcut icon" href="https://spinningup.qiwihui.com/zh_CN/latest/_static/openai_icon.ico">
+
+  <link rel="stylesheet" href="./第二部分：强化学习算法 — Spinning Up 文档_files/theme.css" type="text/css">
+  <link rel="stylesheet" href="./第二部分：强化学习算法 — Spinning Up 文档_files/pygments.css" type="text/css">
+  <link rel="stylesheet" href="./第二部分：强化学习算法 — Spinning Up 文档_files/modify.css" type="text/css">
+    <link rel="index" title="索引" href="https://spinningup.qiwihui.com/zh_CN/latest/genindex.html">
+    <link rel="search" title="搜索" href="https://spinningup.qiwihui.com/zh_CN/latest/search.html">
+    <link rel="next" title="第三部分：策略优化介绍" href="https://spinningup.qiwihui.com/zh_CN/latest/spinningup/rl_intro3.html">
+    <link rel="prev" title="第一部分：强化学习中的核心概念" href="https://spinningup.qiwihui.com/zh_CN/latest/spinningup/rl_intro.html"> 
+
+  
+  <script type="text/javascript" async="" src="./第二部分：强化学习算法 — Spinning Up 文档_files/analytics.js"></script><script type="text/javascript" async="" src="./第二部分：强化学习算法 — Spinning Up 文档_files/js"></script><script type="text/javascript" async="" src="./第二部分：强化学习算法 — Spinning Up 文档_files/analytics.js"></script><script src="./第二部分：强化学习算法 — Spinning Up 文档_files/modernizr.min.js"></script><style id="ab-css-definitions-3-4-0"></style>
+    
+<link rel="canonical" href="第二部分：强化学习算法 — Spinning Up 文档.html">
+
+<link rel="stylesheet" href="./第二部分：强化学习算法 — Spinning Up 文档_files/readthedocs-doc-embed.css" type="text/css">
+
+<script type="text/javascript" src="./第二部分：强化学习算法 — Spinning Up 文档_files/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = "spinningup/rl_intro2"
+READTHEDOCS_DATA['source_suffix'] = ".rst"
+</script>
+
+<script type="text/javascript" src="./第二部分：强化学习算法 — Spinning Up 文档_files/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+<script src="./第二部分：强化学习算法 — Spinning Up 文档_files/ethicalads.min.js" type="text/javascript" async="" id="ethicaladsjs"></script><script src="./第二部分：强化学习算法 — Spinning Up 文档_files/js(1)" type="text/javascript" async=""></script><style type="text/css">  
+
+</style><script src="./第二部分：强化学习算法 — Spinning Up 文档_files/saved_resource" type="text/javascript" async=""></script></head>
+
+<body class="wy-body-for-nav">
+
+
+  <div class="wy-grid-for-nav" style="user-select: auto;">
+
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side" style="user-select: auto;">
+      <div class="wy-side-scroll" style="user-select: auto;">
+        <div class="wy-side-nav-search" style="user-select: auto;">
+
+
+
+            <a href="https://spinningup.qiwihui.com/zh_CN/latest/index.html" style="user-select: auto;">
+
+
+
+
+            <img src="./第二部分：强化学习算法 — Spinning Up 文档_files/spinning-up-logo2.png" class="logo" alt="Logo" style="user-select: auto;">
+
+          </a>
+
+
+
+
+
+              <div class="version" style="user-select: auto;">
+                latest
+              </div>
+
+
+
+
+<div role="search" style="user-select: auto;">
+  <form id="rtd-search-form" class="wy-form" action="https://spinningup.qiwihui.com/zh_CN/latest/search.html" method="get" style="user-select: auto;">
+    <input type="text" name="q" placeholder="Search docs" style="user-select: auto;">
+    <input type="hidden" name="check_keywords" value="yes" style="user-select: auto;">
+    <input type="hidden" name="area" value="default" style="user-select: auto;">
+  </form>
+</div>
+
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation" style="user-select: auto;">
+              <p class="caption" style="user-select: auto;"><span class="caption-text" style="user-select: auto;">用户文档</span></p>
+<ul style="user-select: auto;">
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/user/introduction.html" style="user-select: auto;">算法原理</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/user/installation.html" style="user-select: auto;">安装</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/user/algorithms.html" style="user-select: auto;">算法</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/user/running.html" style="user-select: auto;">运行试验</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/user/saving_and_loading.html" style="user-select: auto;">试验输出</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/user/plotting.html" style="user-select: auto;">绘制结果</a></li>
+</ul>
+<p class="caption" style="user-select: auto;"><span class="caption-text" style="user-select: auto;">强化学习介绍</span></p>
+<ul class="current" style="user-select: auto;">
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/spinningup/rl_intro.html" style="user-select: auto;">第一部分：强化学习中的核心概念</a></li>
+<li class="toctree-l1 current" style="user-select: auto;"><a class="reference internal current" href="第二部分：强化学习算法 — Spinning Up 文档.html" style="user-select: auto;"><span class="toctree-expand" style="user-select: auto;"></span>第二部分：强化学习算法</a><ul style="user-select: auto;">
+
+</li>
+</ul>
+</li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/spinningup/rl_intro3.html" style="user-select: auto;">第三部分：策略优化介绍</a></li>
+</ul>
+<p class="caption" style="user-select: auto;"><span class="caption-text" style="user-select: auto;">资源</span></p>
+<ul style="user-select: auto;">
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/spinningup/spinningup.html" style="user-select: auto;">深度强化学习研究者资料</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/spinningup/keypapers.html" style="user-select: auto;">深度强化学习的核心论文</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/spinningup/exercises.html" style="user-select: auto;">练习</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/spinningup/bench.html" style="user-select: auto;">Spinning Up 算法实现的基准</a></li>
+</ul>
+<p class="caption" style="user-select: auto;"><span class="caption-text" style="user-select: auto;">算法文档</span></p>
+<ul style="user-select: auto;">
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/algorithms/vpg.html" style="user-select: auto;">Vanilla Policy Gradient</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/algorithms/trpo.html" style="user-select: auto;">Trust Region Policy Optimization</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/algorithms/ppo.html" style="user-select: auto;">Proximal Policy Optimization</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/algorithms/ddpg.html" style="user-select: auto;">Deep Deterministic Policy Gradient</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/algorithms/td3.html" style="user-select: auto;">Twin Delayed DDPG</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/algorithms/sac.html" style="user-select: auto;">Soft Actor-Critic</a></li>
+</ul>
+<p class="caption" style="user-select: auto;"><span class="caption-text" style="user-select: auto;">工具文档</span></p>
+<ul style="user-select: auto;">
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/utils/logger.html" style="user-select: auto;">日志记录</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/utils/plotter.html" style="user-select: auto;">绘图</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/utils/mpi.html" style="user-select: auto;">MPI工具</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/utils/run_utils.html" style="user-select: auto;">运行工具</a></li>
+</ul>
+<p class="caption" style="user-select: auto;"><span class="caption-text" style="user-select: auto;">其他</span></p>
+<ul style="user-select: auto;">
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/etc/acknowledgements.html" style="user-select: auto;">致谢</a></li>
+<li class="toctree-l1" style="user-select: auto;"><a class="reference internal" href="https://spinningup.qiwihui.com/zh_CN/latest/etc/author.html" style="user-select: auto;">关于作者</a></li>
+</ul>
+
+
+
+<script data-ad-client="ca-pub-8935595858652656" async="" src="./第二部分：强化学习算法 — Spinning Up 文档_files/f.txt" style="user-select: auto;"></script>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap" style="user-select: auto;">
+
+
+      <nav class="wy-nav-top" aria-label="top navigation" style="user-select: auto;">
+
+          <i data-toggle="wy-nav-top" class="fa fa-bars" style="user-select: auto;"></i>
+          <a href="https://spinningup.qiwihui.com/zh_CN/latest/index.html" style="user-select: auto;">Spinning Up</a>
+
+      </nav>
+
+
+      <div class="wy-nav-content" style="user-select: auto;">
+
+        <div class="rst-content" style="user-select: auto;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" style="user-select: auto;">
+
+  <ul class="wy-breadcrumbs" style="user-select: auto;">
+
+      <li style="user-select: auto;"><a href="https://spinningup.qiwihui.com/zh_CN/latest/index.html" style="user-select: auto;">Docs</a> »</li>
+
+      <li style="user-select: auto;">第二部分：强化学习算法</li>
+
+
+      <li class="wy-breadcrumbs-aside" style="user-select: auto;">
+
+
+
+              <a href="https://github.com/qiwihui/spinningup/blob/zh-cn/docs/spinningup/rl_intro2.rst" class="fa fa-github" style="user-select: auto;"> Edit on GitHub</a>
+
+
+
+      </li>
+
+  </ul>
+
+
+  <hr style="user-select: auto;">
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article" style="user-select: auto;">
+           <div itemprop="articleBody" style="user-select: auto;">
+
+
+
+           </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+    <script type="text/javascript" style="user-select: auto;">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'zh_CN',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="./第二部分：强化学习算法 — Spinning Up 文档_files/jquery.js" style="user-select: auto;"></script>
+      <script type="text/javascript" src="./第二部分：强化学习算法 — Spinning Up 文档_files/underscore.js" style="user-select: auto;"></script>
+      <script type="text/javascript" src="./第二部分：强化学习算法 — Spinning Up 文档_files/doctools.js" style="user-select: auto;"></script>
+      <script type="text/javascript" src="./第二部分：强化学习算法 — Spinning Up 文档_files/translations.js" style="user-select: auto;"></script>
+      <script type="text/javascript" src="./第二部分：强化学习算法 — Spinning Up 文档_files/readthedocs-doc-embed.js" style="user-select: auto;"></script>
+
+
+
+  <script type="text/javascript" src="./第二部分：强化学习算法 — Spinning Up 文档_files/theme.js" style="user-select: auto;"></script>
+
+  <script type="text/javascript" style="user-select: auto;">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="./第二部分：强化学习算法 — Spinning Up 文档_files/js(2)" style="user-select: auto;"></script>
+<script style="user-select: auto;">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-46660488-7');
+</script>
+
+
+
+
+<div class="LImageHighlighter LImageHighlighter__save" data-image-id="null" style="display: none; user-select: auto; top: 412.016px; left: 336.766px;" data-src="https://spinningup.qiwihui.com/zh_CN/latest/_images/rl_algorithms_9_15.svg">
+    <div class="LImageHighlighter__btn" style="user-select: auto;">
+      <div class="LImageHighlighter__highlight" style="user-select: auto;"><div class="LImageHighlighter__icon" style="user-select: auto;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="user-select: auto;">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.86955 0.219635L6.69192 4.75749C6.68483 4.76753 6.67978 4.77887 6.67708 4.79085C6.67437 4.80284 6.67406 4.81525 6.67616 4.82736C6.67825 4.83947 6.68272 4.85104 6.6893 4.86142C6.69588 4.8718 6.70444 4.88078 6.7145 4.88785L11.9389 8.54597C11.949 8.55312 11.9604 8.5582 11.9725 8.56091C11.9845 8.56362 11.997 8.56391 12.0092 8.56176C12.0214 8.55961 12.033 8.55507 12.0434 8.54839C12.0538 8.54172 12.0628 8.53304 12.0698 8.52288L15.0655 4.24447C15.662 5.3643 16 6.64267 16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C8.64378 0 9.26979 0.0760423 9.86955 0.219635ZM8.8715 10.3427L11.5684 9.13051C11.6171 9.10844 11.6233 9.04224 11.5797 9.01145L6.39991 5.38514C6.38995 5.37824 6.37835 5.37408 6.36628 5.3731C6.3542 5.37212 6.34208 5.37435 6.33114 5.37956C6.3202 5.38477 6.31084 5.39277 6.30399 5.40276C6.29714 5.41276 6.29305 5.42438 6.29213 5.43646L6.07556 8.38482L5.6301 9.01299C5.61972 9.02799 5.61567 9.04648 5.61884 9.06445C5.62201 9.08242 5.63215 9.09841 5.64704 9.10896L8.33418 10.9909C8.34158 10.9961 8.34995 10.9998 8.35878 11.0017C8.36762 11.0037 8.37676 11.0039 8.38568 11.0023C8.3946 11.0008 8.40311 10.9974 8.41074 10.9926C8.41838 10.9877 8.42497 10.9814 8.43015 10.9739L8.8715 10.3427ZM7.74707 11.3809L7.33805 11.966C7.31752 11.9901 7.28313 11.9983 7.25439 11.9983L4.04686 11.9998C4.03672 11.9964 4.02752 11.9907 4.01998 11.9831C4.01244 11.9755 4.00677 11.9663 4.00343 11.9561C4.00009 11.9459 3.99917 11.9351 4.00075 11.9246C4.00232 11.914 4.00633 11.9039 4.01248 11.8951L5.48435 9.79665C5.48953 9.78922 5.49612 9.78289 5.50375 9.77802C5.51138 9.77314 5.5199 9.76982 5.52882 9.76825C5.53773 9.76667 5.54687 9.76688 5.55571 9.76885C5.56455 9.77081 5.57291 9.77451 5.58032 9.77972L7.73065 11.2855C7.76144 11.307 7.76862 11.3501 7.74707 11.3809Z" fill="#00C3CC" style="user-select: auto;"></path>
+  </svg></div><span class="LImageHighlighter__text" style="user-select: auto;">Highlight</span></div></div>
+
+  <div class="L-ImageTooltip" style="user-select: auto;">
+    <div class="L-ImageTooltip__main" style="user-select: auto;">
+      <div class="L-ImageTooltip__openState" style="user-select: auto;">
+        <button class="L-ImageTooltip__openStateBtn" style="user-select: auto;">
+          <div class="L-ImageTooltip__openStateIcon L-Public" style="user-select: auto;"></div>
+          <div class="L-ImageTooltip__openStateText" style="user-select: auto;">Public</div>
+          <div class="L-ImageTooltip__openStateArrow" style="user-select: auto;">
+            <div class="L-ImageTooltip__openStateArrowUp" style="user-select: auto;">
+                <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="user-select: auto;">
+                  <path d="M4.40903 0.561797C4.20946 0.285268 3.79771 0.285268 3.59814 0.561798L0.245469 5.2074C0.00681998 5.53808 0.243107 6 0.650912 6H7.35626C7.76406 6 8.00035 5.53808 7.7617 5.2074L4.40903 0.561797Z" fill="#50555C" style="user-select: auto;"></path>
+                </svg>
+              </div>
+              <div class="L-ImageTooltip__openStateArrowDown" style="user-select: auto;">
+                <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="user-select: auto;">
+                  <path d="M4.40903 5.4382C4.20946 5.71473 3.79771 5.71473 3.59814 5.4382L0.245469 0.792603C0.00681998 0.461921 0.243107 0 0.650912 0H7.35626C7.76406 0 8.00035 0.461921 7.7617 0.792603L4.40903 5.4382Z" fill="#50555C" style="user-select: auto;"></path>
+                </svg>
+              </div>
+            </div>
+        </button>
+        <div class="L-ImageTooltip__openStateDropdown L-Hidden" style="user-select: auto;">
+          <button class="L-ImageTooltip__openStateSelect L-Public" style="user-select: auto;">
+            <div class="L-ImageTooltip__openStateSelectIcon L-Public" style="user-select: auto;"></div>
+            <div class="L-ImageTooltip__openStateSelectText L-Public" style="user-select: auto;">设为公开</div>
+          </button>
+          <button class="L-ImageTooltip__openStateSelect L-OnlyMe" style="user-select: auto;">
+            <div class="L-ImageTooltip__openStateSelectIcon L-OnlyMe" style="user-select: auto;"></div>
+            <div class="L-ImageTooltip__openStateSelectText L-OnlyMe" style="user-select: auto;">非公开</div>
+          </button>
+        </div>
+      </div>
+      <div class="L-ImageTooltip__border" style="user-select: auto;"></div>
+      <div class="L-ImageTooltip__color" style="user-select: auto;">
+        <button class="L-ImageTooltip__colorBtn" style="user-select: auto;">
+          <div class="L-ImageTooltip__colorParts" style="user-select: auto;">
+            <div class="L-ImageTooltip__colorPartItem L-First" style="user-select: auto;"></div>
+            <div class="L-ImageTooltip__colorPartItem L-Second" style="user-select: auto;"></div>
+            <div class="L-ImageTooltip__colorPartItem L-Third" style="user-select: auto;"></div>
+          </div>
+          <div class="L-ImageTooltip__colorArrow" style="user-select: auto;">
+            <div class="L-ImageTooltip__colorArrowUp" style="user-select: auto;">
+              <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="user-select: auto;">
+                <path d="M4.40903 0.561797C4.20946 0.285268 3.79771 0.285268 3.59814 0.561798L0.245469 5.2074C0.00681998 5.53808 0.243107 6 0.650912 6H7.35626C7.76406 6 8.00035 5.53808 7.7617 5.2074L4.40903 0.561797Z" fill="#50555C" style="user-select: auto;"></path>
+              </svg>
+            </div>
+            <div class="L-ImageTooltip__colorArrowDown" style="user-select: auto;">
+              <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="user-select: auto;">
+                <path d="M4.40903 5.4382C4.20946 5.71473 3.79771 5.71473 3.59814 5.4382L0.245469 0.792603C0.00681998 0.461921 0.243107 0 0.650912 0H7.35626C7.76406 0 8.00035 0.461921 7.7617 0.792603L4.40903 5.4382Z" fill="#50555C" style="user-select: auto;"></path>
+              </svg>
+            </div>
+          </div>
+        </button>
+        <div class="L-ImageTooltip__colorDropdown L-Hidden" style="user-select: auto;">
+          <button class="L-ImageTooltip__colorSelect" data-slot-id="0" style="user-select: auto;">
+            <div class="L-ImageTooltip__colorSelectIcon L-Yellow" style="user-select: auto;"></div>
+            <div class="L-ImageTooltip__colorSelectText L-Yellow" style="user-select: auto;">Important</div>
+          </button>
+          <button class="L-ImageTooltip__colorSelect" data-slot-id="1" style="user-select: auto;">
+            <div class="L-ImageTooltip__colorSelectIcon L-Mint" style="user-select: auto;"></div>
+            <div class="L-ImageTooltip__colorSelectText L-Mint" style="user-select: auto;">Important</div>
+          </button>
+          <button class="L-ImageTooltip__colorSelect" data-slot-id="2" style="user-select: auto;">
+            <div class="L-ImageTooltip__colorSelectIcon L-Orange" style="user-select: auto;"></div>
+            <div class="L-ImageTooltip__colorSelectText L-Orange" style="user-select: auto;">Important</div>
+          </button>
+          <button class="L-ImageTooltip__colorSelect" data-slot-id="3" style="user-select: auto;">
+            <div class="L-ImageTooltip__colorSelectIcon L-Purple" style="user-select: auto;"></div>
+            <div class="L-ImageTooltip__colorSelectText L-Purple" style="user-select: auto;">Important</div>
+          </button>
+          <button class="L-ImageTooltip__colorSelect" data-slot-id="4" style="user-select: auto;">
+            <div class="L-ImageTooltip__colorSelectIcon L-Blue" style="user-select: auto;"></div>
+            <div class="L-ImageTooltip__colorSelectText L-Blue" style="user-select: auto;">Important</div>
+          </button>
+          <button class="L-ImageTooltip__colorSelect" data-slot-id="5" style="user-select: auto;">
+            <div class="L-ImageTooltip__colorSelectIcon L-Pink" style="user-select: auto;"></div>
+            <div class="L-ImageTooltip__colorSelectText L-Pink" style="user-select: auto;">Important</div>
+          </button>
+        </div>
+      </div>
+      <div class="L-ImageTooltip__border" style="user-select: auto;"></div>
+      <button class="L-ImageTooltip__thread" style="user-select: auto;">
+        <div class="L-ImageTooltip__threadImg" style="user-select: auto;"></div>
+      </button>
+      <div class="L-ImageTooltip__border" style="user-select: auto;"></div>
+      <button class="L-ImageTooltip__delete" style="user-select: auto;">
+        <div class="L-ImageTooltip__deleteImg" style="user-select: auto;"></div>
+      </button>
+
+      <div class="L-ImageTooltip__border L-ImageTooltip__border--reward" style="user-select: auto;"></div><button class="L-ImageTooltip__reward" data-content-type="image" style="user-select: auto;"><div class="L-ImageTooltip__rewardImg" style="user-select: auto;"></div></button>
+    </div>
+  </div>
+  </div>
+
