@@ -5,12 +5,18 @@ import os
 def show_files(path):
     # 首先遍历当前目录所有文件及文件夹
     file_list = os.listdir(path)
+    file_list.sort()
     length = file_list.__len__()
+
+    for i in range(length):
+        if i == 0:continue
+        if file_list[i][-5:] != ".html":
+            file_list.insert(0, file_list[i])
+            del file_list[i+1]
     for i in range(length):
         if file_list[i] == "index.html":
-            tmp = file_list[i]
-            file_list[i] = file_list[0]
-            file_list[0] = tmp
+            file_list.insert(0, file_list[i])
+            del file_list[i+1]
             break
 
 
