@@ -49,7 +49,6 @@ def clean(path):
 
 if __name__ == '__main__':
     algorithm = "./algorithm"
-    open("index.html", "w")
     clean(algorithm)
     show_files(algorithm)
     print("end")
