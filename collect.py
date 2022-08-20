@@ -2,7 +2,7 @@ import os
 import os
 
 
-def show_files(path):
+def show_files(path, _type):
     # 首先遍历当前目录所有文件及文件夹
     file_list = os.listdir(path)
     file_list.sort()
@@ -10,7 +10,7 @@ def show_files(path):
 
     for i in range(length):
         if i == 0:continue
-        if file_list[i][-5:] != ".html":
+        if file_list[i][-_type.__len__():] != _type:
             file_list.insert(0, file_list[i])
             del file_list[i+1]
     for i in range(length):
@@ -31,12 +31,11 @@ def show_files(path):
             insert = "<a href= {}> {} </a>".format(file, file)
             index.write(insert)
             index.write("<br>\n")
-            show_files(cur_path)
+            show_files(cur_path, _type)
         else:
             insert = "<a href= {}> {} </a>".format(file, file)
             index.write(insert)
             index.write("<br>\n")
-
 
 def clean(path):
     # 首先遍历当前目录所有文件及文件夹
@@ -54,7 +53,17 @@ def clean(path):
 
 
 if __name__ == '__main__':
-    algorithm = "./algorithm"
+
+    papers = "./papers"
+    clean(papers)
+    show_files(papers, ".html")
+
+    algorithm = "./papers/html"
     clean(algorithm)
-    show_files(algorithm)
+    show_files(algorithm, ".html")
+
+    papers = "./papers/pdf"
+    clean(papers)
+    show_files(papers, ".pdf")
+
     print("end")
